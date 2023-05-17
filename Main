@@ -1,1 +1,55 @@
+package b1_buoi3;
+
+import java.time.LocalDate;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Order currentOrder = null;
+        int menu;
+         do {
+            System.out.print("1. de them: ");
+            System.out.print("2. in: ");
+            System.out.print("0. thoat: ");
+            menu = sc.nextInt();
+            switch (menu) {
+                case 1:
+                     System.out.print("Nhap Ma SP: ");
+                     String productID = sc.nextLine();
+                     sc.nextLine();
+                     System.out.print("Nhap Mo Ta: ");
+                     String description = sc.nextLine();
+                     System.out.print("Nhap Gia: ");
+                     double price = sc.nextDouble();
+                     System.out.print("Nhap So Luong: ");
+                     int quantity = sc.nextInt();
+                     Product p = new  Product(description, productID, price);
+                     if(currentOrder==null){
+                         currentOrder = new Order(LocalDate.now());
+                     }
+                     currentOrder.addLineItem(p, quantity);
+                     System.out.println("them thanh cong!!!");
+                    break;
+                case 2:
+                    if(currentOrder!=null){
+                        System.out.println(currentOrder.toString());
+                        currentOrder=null;
+                    }else{
+                         System.out.println("khong co don hang");
+                     }                                           
+                    break;
+                default:
+                    if(menu==0){
+                        System.out.println("Thoat");
+                    }else{
+                        System.out.println("Vui long nhap lai");
+                    }
+                if(currentOrder==null){
+                    currentOrder= new Order(LocalDate.now());
+                }
+            }
+        } while (menu != 0);
+ }
+}
 
